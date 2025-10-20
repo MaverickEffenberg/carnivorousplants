@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('head')
-<link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 @endsection
 
 @section('content')
 <div class="container my-5 min-h-screen">
     <div class="row g-4">
+        {{-- Left Column: Cart Items --}}
         <div class="col-lg-8">
             <div class="card p-3">
                 <div class="card-header bg-white border-0 pt-3">
@@ -16,12 +17,9 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    {{-- Looping Cart Items --}}
                     @forelse ($cartItems as $item)
                         <div class="d-flex align-items-center mb-4">
-                            {{-- Access the meal relationship for image, name, and price --}}
                             <img src="{{ asset($item->meal->image_url) }}" alt="{{ $item->meal->name }}" class="cart-item-img">
-
                             <div class="flex-grow-1 ms-3">
                                 <h6 class="fw-bold mb-1">{{ $item->meal->name }}</h6>
                                 <p class="text-muted small mb-2">
@@ -33,14 +31,12 @@
                                     <button class="btn btn-sm btn-outline-secondary quantity-btn">+</button>
                                 </div>
                             </div>
-
                             <div class="ms-3">
-                                {{-- Calculate total price on the fly --}}
                                 <span class="fw-bold">Rp. {{ number_format($item->meal->price * $item->quantity, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     @empty
-                        <p class="w-full text-center">You have no meals on your cart</p>
+                        <p class="w-100 text-center">You have no meals in your cart</p>
                     @endforelse
                 </div>
             </div>
@@ -71,7 +67,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

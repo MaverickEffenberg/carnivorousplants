@@ -11,21 +11,21 @@
             </svg>
         </a>
 
-        {{-- Meal Title & Price --}}
+        {{-- Plant Title & Price --}}
         <div class="text-center mb-5">
             <h1 style="font-family: 'Preahvihear', sans-serif; font-weight: 600; color: #2D114B; font-size: 2rem;">
-                {{ $meal->name }}
+                {{ $plant->name }}
             </h1>
             <p style="color: #2D114B; font-size: 1.25rem; margin-bottom: 0;">
-                {{ $meal->formatted_price }}
+                {{ $plant->formatted_price ?? number_format($plant->price, 0, ',', '.') }}
             </p>
         </div>
 
         {{-- Image & Description --}}
         <div class="row justify-content-center align-items-center g-5">
             <div class="col-md-5 text-center">
-                <img src="{{ asset($meal->image_url) }}" 
-                        alt="{{ $meal->name }}" 
+                <img src="{{ asset($plant->image_url) }}" 
+                        alt="{{ $plant->name }}" 
                         style="border-radius: 25px; width: 100%; max-width: 400px; height: auto; object-fit: cover;">
             </div>
 
@@ -34,7 +34,7 @@
                     Description
                 </h4>
                 <p style="color: #4A3763; font-size: 1rem; line-height: 1.7; margin-top: 10px;">
-                    {{ $meal->description }}
+                    {{ $plant->description }}
                 </p>
                 <button class="btn mt-4 px-5 py-3 fw-bold"
                         style="background-color: #2D114B; color: #fff; border: none; border-radius: 25px; font-size: 1rem;">
@@ -53,10 +53,14 @@
                 @if ($reviewCount > 0)
                 <div class="d-flex align-items-center">
                     <span class="fw-bold me-2" style="color: #2D114B;">{{ $averageRating }}</span>
-                    <div style="color: #ffc107;"> @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $averageRating) <i class="bi bi-star-fill"></i>
-                            @elseif ($i - 0.5 <= $averageRating) <i class="bi bi-star-half"></i>
-                            @else <i class="bi bi-star"></i>
+                    <div style="color: #ffc107;">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $averageRating)
+                                <i class="bi bi-star-fill"></i>
+                            @elseif ($i - 0.5 <= $averageRating)
+                                <i class="bi bi-star-half"></i>
+                            @else
+                                <i class="bi bi-star"></i>
                             @endif
                         @endfor
                     </div>
@@ -82,13 +86,13 @@
                     </div>
                 </div>
             @empty
-                <p class="text-muted text-center">No reviews for this meal yet.</p>
+                <p class="text-muted text-center">No reviews for this plant yet.</p>
             @endforelse
 
-            {{-- "Show all reviews" button (only appears if there are more than 2 reviews) --}}
+            {{-- "Show all reviews" button --}}
             @if($reviewCount > 2)
                 <div class="text-center mt-4">
-                    <a href="{{ route('menu.reviews', $meal->id) }}" class="btn px-4 py-2" 
+                    <a href="{{ route('plants.reviews', $plant->id) }}" class="btn px-4 py-2" 
                     style="background-color: transparent; color: #2D114B; border: 1px solid #2D114B; border-radius: 25px;">
                         Show all reviews
                     </a>
@@ -102,8 +106,8 @@
                 Suggested for you
             </h3>
             <div class="d-flex flex-wrap gap-4 justify-content-start">
-                @foreach($suggestedMeals as $suggested)
-                    <a href="{{ route('menu.show', $suggested->id) }}" class="text-decoration-none">
+                @foreach($suggestedPlants as $suggested)
+                    <a href="{{ route('plants.show', $suggested->id) }}" class="text-decoration-none">
                         <div class="card border-0 text-center"
                                 style="width: 180px; border-radius: 25px; background-color: #fff; 
                                     box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
@@ -116,7 +120,7 @@
                                     {{ $suggested->name }}
                                 </h6>
                                 <p style="color: #4A3763; font-size: 0.9rem; margin: 0;">
-                                    {{ $meal->formatted_price }}
+                                    {{ number_format($suggested->price, 0, ',', '.') }}
                                 </p>
                             </div>
                         </div>

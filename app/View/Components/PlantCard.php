@@ -5,18 +5,18 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Models\Meal;
+use App\Models\Plant;
 
-class MealCard extends Component
+class PlantCard extends Component
 {
-    public $meal;
+    public $plant;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(Meal $meal)
+    public function __construct(Plant $plant)
     {
-        $this->meal = $meal;
+        $this->plant = $plant;
     }
 
     /**
@@ -24,6 +24,6 @@ class MealCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.meal-card');
+        return view('components.plant-card');
     }
 }

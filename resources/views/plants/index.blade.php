@@ -3,9 +3,9 @@
 @section('content')
     {{-- Hero Section --}}
     <section class="text-center text-white d-flex align-items-center justify-content-center flex-column"
-                style="background: linear-gradient(rgba(249, 115, 82, 0.8), rgba(249, 115, 82, 0.8)), url('{{ asset('images/hero-bg.webp') }}') center/cover no-repeat; height: 40vh;">
-        <h1 class="mb-3" style="font-family: 'Pacifico'; font-size: 3.5rem;">Menu Kami</h1>
-        <p class="lead" style="font-size: 1.2rem; max-width: 600px;">Pilih makanan favoritmu!</p>
+        style="background: linear-gradient(rgba(249, 115, 82, 0.8), rgba(249, 115, 82, 0.8)), url('{{ asset('images/hero-bg.webp') }}') center/cover no-repeat; height: 40vh;">
+        <h1 class="mb-3" style="font-family: 'Pacifico'; font-size: 3.5rem;">Galeri Tanaman</h1>
+        <p class="lead" style="font-size: 1.2rem; max-width: 600px;">Pilih tanaman favoritmu!</p>
     </section>
 
     {{-- Filter Section --}}
@@ -25,47 +25,45 @@
         </div>
     </section>
 
-    {{-- Menu Grid Section --}}
+    {{-- Plant Grid Section --}}
     <section class="py-5" style="background-color: #FEF3F0; min-height: 60vh;">
         <div class="container">
-            @if($meals->isEmpty())
+            @if($plants->isEmpty())
                 <div class="text-center py-5">
-                    <h3 style="color: #64748B;">Tidak ada menu tersedia.</h3>
+                    <h3 style="color: #64748B;">Tidak ada tanaman tersedia.</h3>
                 </div>
             @else
                 <div class="row g-4">
-                    @foreach ($meals as $meal)
+                    @foreach ($plants as $plant)
                         <div class="col-6 col-md-4 col-lg-3">
-                            <x-meal-card :meal="$meal" />
+                            <x-plant-card :plant="$plant" />
                         </div>
                     @endforeach
                 </div>
 
                 {{-- Pagination --}}
-                @if($meals->hasPages())
+                @if($plants->hasPages())
                     <div class="d-flex justify-content-center mt-5">
                         <nav>
                             <ul class="pagination">
                                 {{-- Previous Page Link --}}
-                                @if ($meals->onFirstPage())
+                                @if ($plants->onFirstPage())
                                     <li class="page-item disabled">
                                         <span class="page-link" style="background-color: #fff; border: 2px solid #F97352; color: #64748B; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
-                                            {{-- Teks diganti dengan ikon --}}
                                             <i class="bi bi-chevron-left"></i>
                                         </span>
                                     </li>
                                 @else
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $meals->previousPageUrl() }}" style="background-color: #F97352; border: 2px solid #F97352; color: white; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
-                                            {{-- Teks diganti dengan ikon --}}
+                                        <a class="page-link" href="{{ $plants->previousPageUrl() }}" style="background-color: #F97352; border: 2px solid #F97352; color: white; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
                                             <i class="bi bi-chevron-left"></i>
                                         </a>
                                     </li>
                                 @endif
 
                                 {{-- Pagination Elements --}}
-                                @foreach ($meals->getUrlRange(1, $meals->lastPage()) as $page => $url)
-                                    @if ($page == $meals->currentPage())
+                                @foreach ($plants->getUrlRange(1, $plants->lastPage()) as $page => $url)
+                                    @if ($page == $plants->currentPage())
                                         <li class="page-item active">
                                             <span class="page-link" style="background-color: #F97352; border: 2px solid #F97352; color: white; border-radius: 10px; margin: 0 5px; min-width: 45px; text-align: center; padding: 10px;">{{ $page }}</span>
                                         </li>
@@ -77,17 +75,15 @@
                                 @endforeach
 
                                 {{-- Next Page Link --}}
-                                @if ($meals->hasMorePages())
+                                @if ($plants->hasMorePages())
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $meals->nextPageUrl() }}" style="background-color: #F97352; border: 2px solid #F97352; color: white; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
-                                            {{-- Teks diganti dengan ikon --}}
+                                        <a class="page-link" href="{{ $plants->nextPageUrl() }}" style="background-color: #F97352; border: 2px solid #F97352; color: white; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
                                             <i class="bi bi-chevron-right"></i>
                                         </a>
                                     </li>
                                 @else
                                     <li class="page-item disabled">
                                         <span class="page-link" style="background-color: #fff; border: 2px solid #F97352; color: #64748B; border-radius: 10px; margin: 0 5px; padding: 10px 20px;">
-                                            {{-- Teks diganti dengan ikon --}}
                                             <i class="bi bi-chevron-right"></i>
                                         </span>
                                     </li>

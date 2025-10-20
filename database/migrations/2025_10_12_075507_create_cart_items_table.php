@@ -17,9 +17,10 @@ return new class extends Migration
                   ->constrained('users')
                   ->onDelete('cascade');
 
-            $table->foreignId('meal_id')
-                  ->constrained('meals')
+            $table->foreignId('plant_id')
+                  ->constrained('plants')
                   ->onDelete('cascade');
+
 
             $table->integer('quantity')->default(1);
             $table->string('notes')->nullable();

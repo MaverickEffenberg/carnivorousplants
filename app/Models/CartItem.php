@@ -9,10 +9,9 @@ class CartItem extends Model
 {
     use HasFactory;
 
-    // Allow mass assignment for these columns
     protected $fillable = [
         'user_id',
-        'meal_id',
+        'plant_id',
         'quantity',
         'notes',
     ];
@@ -25,9 +24,9 @@ class CartItem extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Each cart item belongs to a meal
-    public function meal()
+    // Each cart item belongs to a plant
+    public function plant()
     {
-        return $this->belongsTo(Meal::class);
+        return $this->belongsTo(Plant::class);
     }
 }

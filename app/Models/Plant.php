@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Meal extends Model
+class Plant extends Model
 {
     use HasFactory;
 
@@ -24,18 +24,19 @@ class Meal extends Model
         'price' => 'decimal:2'
     ];
 
+    // One plant has many reviews
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-    // Accessor untuk format harga
+    // Accessor: formatted price (Rp)
     public function getFormattedPriceAttribute()
     {
         return 'Rp. ' . number_format($this->price, 0, ',', '.');
     }
 
-    // Accessor untuk deskripsi pendek
+    // Accessor: short description for cards
     public function getShortDescriptionAttribute()
     {
         return Str::limit($this->description, 60);

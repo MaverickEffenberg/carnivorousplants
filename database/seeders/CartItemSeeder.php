@@ -8,47 +8,40 @@ use Carbon\Carbon;
 
 class CartItemSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run(): void
     {
-
         $now = Carbon::now();
 
         DB::table('cart_items')->insert([
             [
                 'user_id' => 1,
-                'meal_id' => 1,
+                'plant_id' => 1,
                 'quantity' => 2,
-                'notes' => 'Tolong yang satu pedas, yang satu tidak pedas.',
+                'notes' => 'Tanaman ini cocok untuk area terang tapi tidak langsung kena matahari.',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
                 'user_id' => 1,
-                'meal_id' => 5,
+                'plant_id' => 5,
                 'quantity' => 1,
-                'notes' => 'Banyakin bawang gorengnya ya.',
+                'notes' => 'Tolong dibungkus rapi, untuk hadiah.',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
                 'user_id' => 1,
-                'meal_id' => 7,
+                'plant_id' => 3,
                 'quantity' => 3,
-                'notes' => null, 
+                'notes' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
-
             [
-                'user_id' => 2,
-                'meal_id' => 2, 
+                'user_id' => 1,
+                'plant_id' => 2,
                 'quantity' => 1,
-                'notes' => 'Baksonya minta 5.', 
+                'notes' => 'Tambahkan pot tanah liat kecil.',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
